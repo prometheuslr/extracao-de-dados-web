@@ -32,9 +32,11 @@ for link in links:
 quan_urls = len(urls)
 
 dados_sites = []
-
+dados_ingressos = []
+id_show = 0
 #Captura dos dados em cada link
 for i in range(0,quan_urls):
+    id_show= id_show+1
     if urls:
         url_dos_sites = urls[i]
         response_sites = requests.get(url_dos_sites)
@@ -73,8 +75,43 @@ for i in range(0,quan_urls):
         print("Elemento <li> não encontrado.")
 
     # h2_text = "Título", info_text = "Informação", n_data = "Data"
-    dados_sites.append([h2_text,info_text, n_data])
+    dados_sites.append([id_show,h2_text,info_text, n_data])
     
+    #Ingressos
+    lote = None
+    tipo_ingreeso = None
+    valor_ingresso = None
+    disponibilidade = None
+
+    class_ingressos = soup_sites.find_all('div',class_='opcao-ingresso')
+    class_ingressos_g = soup_sites.find('div',class_='opcao-ingresso')
+    quan_class_ingressos = len(class_ingressos)
+    #Verifica se o ingresso é gratis
+
+    if class_ingressos_g == None:
+        ingresso = "Gratis"
+        dados_ingressos.append([id_show,ingresso,lote,tipo_ingreeso,valor_ingresso,disponibilidade])
+    else:
+        x=[]
+        for i in range(0,quan_class_ingressos):
+            
+            ingresso = "Pago"
+            #Lote
+            lote = class_ingressos[i].find('span', class_="info-lft").get_text()
+            #Tipo de ingresso
+            tipo_ingreeso = class_ingressos[i].find('span', class_="caps").get_text()
+            #Valor
+            valor_ingresso = class_ingressos[i].find('div', class_="valor-ingresso-unid left-comp").get_text().strip()[2:].strip()
+            #Disponibilidade
+            disponibilidade = class_ingressos[i].find('span', class_="badge")
+
+            if disponibilidade == None:
+                disponibilidade = "Disponivel"
+            else:
+                disponibilidade = disponibilidade.get_text()
+
+            x.append([id_show,ingresso,lote, tipo_ingreeso,valor_ingresso, disponibilidade])
+        dados_ingressos.append(x)
     
     csv_filename = 'eventos.csv'
     
