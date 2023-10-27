@@ -113,7 +113,7 @@ for i in range(0,quan_urls):
             x.append([id_show,ingresso,lote, tipo_ingreeso,valor_ingresso, disponibilidade])
         dados_ingressos.append(x)
     
-    csv_filename = 'eventos.csv'
+
     
 wb = openpyxl.Workbook()
 ws = wb.active  # Obtenha a planilha ativa
