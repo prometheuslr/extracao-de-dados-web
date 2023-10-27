@@ -1,5 +1,6 @@
 import pandas as pd
 import sqlite3
+import json
 
 def lerPlanilha():
     # Criando uma conexão com o banco de dados SQLite
@@ -26,9 +27,23 @@ def mostrarDados():
     cursor.execute("SELECT * FROM eventos")
 
     result = cursor.fetchall()
-
-    print("Nome, Data e Valor")
+    
+    data = []
     for row in result:
-        print(row)
+        data.append({
+            "Nome": row[0],
+            "Data": row[1],
+            "Valor": row[2]
+        })
+    
+    
+    json_data = json.dumps(data, indent=2)
+    
+    print(json_data)  
+    
+
+    # print("Nome111, Data e Valor")
+    # for row in result:
+    #     print(row)
 
     conn.close()
