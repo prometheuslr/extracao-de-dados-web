@@ -110,8 +110,9 @@ for i in range(0,quan_urls):
             else:
                 disponibilidade = disponibilidade.get_text()
 
-            x.append([id_show,ingresso,lote, tipo_ingreeso,valor_ingresso, disponibilidade])
-        dados_ingressos.append(x)
+            dados_ingressos.append([id_show,ingresso,lote, tipo_ingreeso,valor_ingresso, disponibilidade])
+            
+        
     
 
     
@@ -119,19 +120,35 @@ wb = openpyxl.Workbook()
 ws = wb.active  # Obtenha a planilha ativa
 
 # Cabeçalhos das colunas
-ws.append(["Título", "Informação", "Data"])
+ws.append(["Id","Título", "Informação", "Data"])
 
 # Adicione os dados coletados às linhas
 for dados in dados_sites:
     ws.append(dados)
 
 # Salve o arquivo Excel com um nome específico
-excel_filename = 'eventos1.xlsx'
+excel_filename = 'dados_site_shows.xlsx'
 wb.save(excel_filename)
 
 print(f'Dados salvos em {excel_filename}')
     
 
 print(dados_sites)
+
+print(dados_ingressos)
+
+
+wi = openpyxl.Workbook()
+wa = wi.active 
+# Cabeçalhos das colunas
+wa.append(["Id", "Ingresso", "Lote", "Tipo do ingresso", "Valor do ingresso", "Disponibilidade"])
+
+# Adicione os dados coletados às linhas
+for ingresso_info in dados_ingressos:
+    wa.append(ingresso_info)
+
+# Salve o arquivo Excel com um nome específico
+excel_name = 'dodos_ingresso_show.xlsx'
+wi.save(excel_name)
 
 
