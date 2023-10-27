@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import openpyxl
 
 
 #Capturara dos links atraves da pagina inicial
@@ -71,7 +72,28 @@ for i in range(0,quan_urls):
     else:
         print("Elemento <li> não encontrado.")
 
+    # h2_text = "Título", info_text = "Informação", n_data = "Data"
     dados_sites.append([h2_text,info_text, n_data])
+    
+    
+    csv_filename = 'eventos.csv'
+    
+wb = openpyxl.Workbook()
+ws = wb.active  # Obtenha a planilha ativa
+
+# Cabeçalhos das colunas
+ws.append(["Título", "Informação", "Data"])
+
+# Adicione os dados coletados às linhas
+for dados in dados_sites:
+    ws.append(dados)
+
+# Salve o arquivo Excel com um nome específico
+excel_filename = 'eventos1.xlsx'
+wb.save(excel_filename)
+
+print(f'Dados salvos em {excel_filename}')
+    
 
 print(dados_sites)
 
