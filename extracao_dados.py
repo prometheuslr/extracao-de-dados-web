@@ -131,12 +131,12 @@ def webScrap():
     excel_filename = 'dados_site_shows.xlsx'
     wb.save(excel_filename)
 
-    print(f'Dados salvos em {excel_filename}')
+    #print(f'Dados salvos em {excel_filename}')
         
 
-    print(dados_sites)
+    #print(dados_sites)
 
-    print(dados_ingressos)
+    #print(dados_ingressos)
 
 
     wi = openpyxl.Workbook()

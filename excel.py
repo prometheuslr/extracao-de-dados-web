@@ -18,6 +18,8 @@ def lerPlanilha():
     # Fechando a conexão com o banco de dados
     conn.close()
 
+    mostrarDados()
+
 def mostrarDados():
     # Criando uma conexão com o banco de dados SQLite
     conn = sqlite3.connect('eventos.db')
@@ -33,11 +35,30 @@ def mostrarDados():
     print("ID | EVENTO")
     for row in result:
         print(f"{row[0]} | Evento: {row[1]}")
-
+    print("\n<<Mais>>")
 
     conn.close()
 
 def mostrarTodosDados():
+    # Criando uma conexão com o banco de dados SQLite
+    conn = sqlite3.connect('eventos.db')
+
+    # Criando um cursor para executar comandos SQL
+    cursor = conn.cursor()
+
+    # Executando uma consulta SQL para recuperar os dados da tabela 'eventos'
+    cursor.execute("SELECT * FROM eventos")
+
+    result = cursor.fetchall()
+
+    print("ID | EVENTO")
+    for row in result:
+        print(f"{row[0]} | Evento: {row[1]}")
+
+
+    conn.close()
+
+def mostrarEvento(evento):
     # Criando uma conexão com o banco de dados SQLite
     conn = sqlite3.connect('eventos.db')
 
