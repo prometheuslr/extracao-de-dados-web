@@ -1,13 +1,12 @@
 import pandas as pd
 import sqlite3
-import json
 
 def lerPlanilha():
     # Criando uma conexão com o banco de dados SQLite
     conn = sqlite3.connect('eventos.db')
     
     # Carregando os dados da planilha Excel
-    excel_file = 'eventos.xlsx'
+    excel_file = 'dados_site_shows.xlsx'
     df = pd.read_excel(excel_file)
 
     # Salvar os dados do DataFrame para o banco de dados
@@ -27,23 +26,12 @@ def mostrarDados():
     cursor.execute("SELECT * FROM eventos")
 
     result = cursor.fetchall()
-    
-    data = []
-    for row in result:
-        data.append({
-            "Nome": row[0],
-            "Data": row[1],
-            "Valor": row[2]
-        })
-    
-    
-    json_data = json.dumps(data, indent=2)
-    
-    print(json_data)  
-    
 
-    # print("Nome111, Data e Valor")
-    # for row in result:
-    #     print(row)
+    print("Nome, Data e Valor")
+    for row in result:
+        if row < 10:
+            print(f"{row[0]} | Evento: {row[1]}")
+        else:
+            pass
 
     conn.close()

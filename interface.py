@@ -4,7 +4,10 @@ def userCLI():
     print("Web Scrapping de eventos\nPor João Nunes, João Lucas, Lucas Vinicius\n")
 
     # Exibindo os dados na tela
-    excel.mostrarDados()
+    try:
+        excel.mostrarDados()
+    except:
+        print('Ainda não existe dados coletados')
 
     userOpt = int(input("\n1 - Vasculhar por novos eventos | 2 - Sair\n>> "))
 
