@@ -7,7 +7,8 @@ def userCLI():
     try:
         excel.mostrarDados()
     except:
-        print('Ainda não existe dados coletados')
+        print('Não existe eventos rastreados')
+    
 
     userOpt = int(input("\n1 - Vasculhar por novos eventos | 2 - Sair\n>> "))
 
@@ -21,4 +22,8 @@ def userInput(userOpt):
             excel.lerPlanilha()
             userCLI()
         case 2:
+            excel.mostrarTodosDados()
+            userCLI()
+        case 3:
             exit()
+        
