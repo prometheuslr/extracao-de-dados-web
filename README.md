@@ -11,4 +11,4 @@
 >
 > Windows: ```venv\Scripts\activate.bat```
 >
-> Agora é só instalar a dependência: ```pandas, requests, openpyxl e bs4``` e executar ```python3 main.py```
+> Agora é só instalar as dependências: ```pandas, requests, openpyxl e bs4``` e executar ```python3 main.py```
