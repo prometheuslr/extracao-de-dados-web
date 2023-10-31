@@ -1,13 +1,15 @@
 import pandas as pd
 import sqlite3
-import json
+from extracao_dados import webScrap
 
 def lerPlanilha():
+
+    webScrap()
     # Criando uma conexão com o banco de dados SQLite
     conn = sqlite3.connect('eventos.db')
     
     # Carregando os dados da planilha Excel
-    excel_file = 'eventos.xlsx'
+    excel_file = 'dados_site_shows.xlsx'
     df = pd.read_excel(excel_file)
 
     # Salvar os dados do DataFrame para o banco de dados
@@ -16,7 +18,28 @@ def lerPlanilha():
     # Fechando a conexão com o banco de dados
     conn.close()
 
+    mostrarDados()
+
 def mostrarDados():
+    # Criando uma conexão com o banco de dados SQLite
+    conn = sqlite3.connect('eventos.db')
+
+    # Criando um cursor para executar comandos SQL
+    cursor = conn.cursor()
+
+    # Executando uma consulta SQL para recuperar os dados da tabela 'eventos'
+    cursor.execute("SELECT * FROM eventos LIMIT 10")
+
+    result = cursor.fetchall()
+
+    print("ID | EVENTO")
+    for row in result:
+        print(f"{row[0]} | Evento: {row[1]}")
+    print("\n<<Mais>>")
+
+    conn.close()
+
+def mostrarTodosDados():
     # Criando uma conexão com o banco de dados SQLite
     conn = sqlite3.connect('eventos.db')
 
@@ -27,23 +50,29 @@ def mostrarDados():
     cursor.execute("SELECT * FROM eventos")
 
     result = cursor.fetchall()
-    
-    data = []
-    for row in result:
-        data.append({
-            "Nome": row[0],
-            "Data": row[1],
-            "Valor": row[2]
-        })
-    
-    
-    json_data = json.dumps(data, indent=2)
-    
-    print(json_data)  
-    
 
-    # print("Nome111, Data e Valor")
-    # for row in result:
-    #     print(row)
+    print("ID | EVENTO")
+    for row in result:
+        print(f"{row[0]} | Evento: {row[1]}")
+
+
+    conn.close()
+
+def mostrarEvento(evento):
+    # Criando uma conexão com o banco de dados SQLite
+    conn = sqlite3.connect('eventos.db')
+
+    # Criando um cursor para executar comandos SQL
+    cursor = conn.cursor()
+
+    # Executando uma consulta SQL para recuperar os dados da tabela 'eventos'
+    cursor.execute("SELECT * FROM eventos")
+
+    result = cursor.fetchall()
+
+    print("ID | EVENTO")
+    for row in result:
+        print(f"{row[0]} | Evento: {row[1]}")
+
 
     conn.close()
