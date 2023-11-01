@@ -1,40 +1,40 @@
-import excel
+import excel_db
 from os import system
 
 def userCLI(n):
     match n:
         case 0:
-            system('clear')
-            print("Web Scrapping de eventos\nPor João Nunes, João Lucas, Lucas Vinicius\n")  
+            print("Web Scrapping de eventos no site https://www.ingressoprime.com\nPor João Nunes, João Lucas, Lucas Vinicius\n")  
 
-            # Exibindo os dados na tela
-            try:
-                excel.mostrarDados()
-            except:
-                print('Não existe eventos rastreados')
+            # # Exibindo os dados na tela
+            # try:
+            #     excel.mostrarDados()
+            # except:
+            #     print('Não existe eventos rastreados')
             userOpt = userInput(int(input("\n1 - Vasculhar por novos eventos | 2 - Mostrar todos os eventos | 3 - Escolher evento | 4 - Sair\n>> ")))
         case 1:
-            system('clear')
-            print("Web Scrapping de eventos\nPor João Nunes, João Lucas, Lucas Vinicius\n")  
-
+            print("Carregando......")
             # Exibindo os dados na tela
             try:
-                excel.lerPlanilha()
+                excel_db.lerPlanilha()
             except:
                 print('Não existe eventos rastreados')
             userOpt = userInput(int(input("\n1 - Vasculhar por novos eventos | 2 - Mostrar todos os eventos | 3 - Escolher evento | 4 - Sair\n>> ")))
         case 2:
-            system('clear')
-            print("Web Scrapping de eventos\nPor João Nunes, João Lucas, Lucas Vinicius\n")  
-
             # Exibindo os dados na tela
             try:
-                excel.mostrarTodosDados()
+                excel_db.mostrarTodosDados()
             except:
                 print('Não existe eventos rastreados')
             userOpt = userInput(int(input("\n1 - Vasculhar por novos eventos | 2 - Mostrar todos os eventos | 3 - Escolher evento | 4 - Sair\n>> ")))
         case 3:
-            userOpt = userInput(int(input("\nDigite o ID do evento\n>> ")))
+            try:
+                id_ig = int(input("\nDigite o ID do evento\n>> "))
+                excel_db.mostrarEvento(id_ig)
+            except:
+                print("Selecione um id existente")
+
+            userOpt = userInput(int(input("\n1 - Vasculhar por novos eventos | 2 - Mostrar todos os eventos | 3 - Escolher evento | 4 - Sair\n>> ")))
 
 def userInput(userOpt):
     match userOpt:

@@ -121,7 +121,7 @@ def webScrap():
     ws = wb.active  # Obtenha a planilha ativa
 
     # Cabeçalhos das colunas
-    ws.append(["Id","Título", "Informação", "Data"])
+    ws.append(["Id","Titulo", "Informacao", "Data"])
 
     # Adicione os dados coletados às linhas
     for dados in dados_sites:
@@ -142,7 +142,7 @@ def webScrap():
     wi = openpyxl.Workbook()
     wa = wi.active 
     # Cabeçalhos das colunas
-    wa.append(["Id", "Ingresso", "Lote", "Tipo do ingresso", "Valor do ingresso", "Disponibilidade"])
+    wa.append(["Id", "Ingresso", "Lote", "Tipo_do_ingresso", "Valor_do_ingresso", "Disponibilidade"])
 
     # Adicione os dados coletados às linhas
     for ingresso_info in dados_ingressos:
